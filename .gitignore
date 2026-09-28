@@ -1,0 +1,9 @@
+.omc/
+*.log
+*.orig
+*.rej
+*~
+
+# Proprietary firmware is excluded from Git. BLOBS.sha256 records input identity.
+radio/
+prebuilt/stock-7.1.2.0G/

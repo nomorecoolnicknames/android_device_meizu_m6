@@ -1,0 +1,32 @@
+# Bionic loader config file - Meizu M6 (meizu_m6 / MT6750) override
+#
+# Based on system/core/rootdir/etc/ld.config.legacy.txt (non-Treble).
+#
+# fingerprint.default.so (Nougat) is loaded by the fingerprint HIDL service
+# from /vendor/bin/hw, i.e. in the [vendor] namespace, and needs the Nougat
+# libkeymaster_messages.so and libkeymaster1.so, whose C++ mangling differs
+# from the platform copies in /system/lib64. The Nougat copies live in
+# /vendor/lib64/fp_a7, which is searched before /system/${LIB} here.
+# keystore and other /system processes use [legacy] and are unaffected.
+
+# Processes from /vendor/bin/ run in the [vendor] namespace.
+# Processes from /system/ or /sbin/ run in the [legacy] namespace.
+dir.vendor = /vendor/bin/
+dir.vendor = /system/vendor/bin/
+dir.legacy = /system
+dir.legacy = /vendor
+dir.legacy = /sbin
+
+[vendor]
+# fp_a7 comes before /system/${LIB}; the rest of the search order is the
+# upstream legacy one.
+namespace.default.isolated = false
+namespace.default.search.paths = /vendor/${LIB}/hw:/vendor/${LIB}/egl:/vendor/${LIB}:/vendor/${LIB}/fp_a7:/system/${LIB}
+namespace.default.asan.search.paths = /data/asan/vendor/${LIB}/hw:/vendor/${LIB}/hw:/data/asan/vendor/${LIB}/egl:/vendor/${LIB}/egl:/data/asan/vendor/${LIB}:/vendor/${LIB}:/vendor/${LIB}/fp_a7:/data/asan/system/${LIB}:/system/${LIB}
+
+[legacy]
+# Unchanged from upstream ld.config.legacy.txt. goodixfingerprintd gets the
+# Nougat keymaster libraries via LD_LIBRARY_PATH in microtrust.rc.
+namespace.default.isolated = false
+namespace.default.search.paths = /system/${LIB}:/vendor/${LIB}
+namespace.default.asan.search.paths = /data/asan/system/${LIB}:/system/${LIB}:/data/asan/vendor/${LIB}:/vendor/${LIB}
