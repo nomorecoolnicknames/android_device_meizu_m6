@@ -1,6 +1,6 @@
 # Meizu M6 (meizu_m6)
 
-Device tree for the Meizu M6 for LineageOS 18.1.
+Device tree for the Meizu M6 for LineageOS 20.0.
 
 ## Specifications
 
@@ -26,7 +26,9 @@ Device tree for the Meizu M6 for LineageOS 18.1.
 
 ## Building
 
-Sync the LineageOS 18.1 source and place this tree at `device/meizu/meizu_m6`.
+Sync the LineageOS 20.0 source and add the local manifest from
+[android_local_manifests_meizu](https://github.com/nomorecoolnicknames/android_local_manifests_meizu)
+(branch `lineage-20.0`); this tree goes to `device/meizu/meizu_m6`.
 Required external inputs:
 
 - matching legacy MediaTek framework/HAL adaptations for the platform;
