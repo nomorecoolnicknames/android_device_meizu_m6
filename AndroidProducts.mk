@@ -1,9 +1,11 @@
-# Pie (Android 9) derives the product NAME from the basename of a path-only
-# PRODUCT_MAKEFILES entry, NOT from PRODUCT_NAME inside. lineage.mk basename is
-# "lineage", so use the explicit name:path form to keep the authoritative
-# lineage.mk while presenting it under the product name lineage_meizu_m6.
+#
+# Copyright (C) 2026 The LineageOS Project
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
 PRODUCT_MAKEFILES := \
-    lineage_meizu_m6:$(LOCAL_DIR)/lineage.mk
+    $(LOCAL_DIR)/lineage_meizu_m6.mk
 
 COMMON_LUNCH_CHOICES := \
     lineage_meizu_m6-userdebug \

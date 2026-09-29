@@ -1,0 +1,48 @@
+# vendor.prop - Meizu M6 (meizu_m6 / M711), MT6750
+# Installed to /vendor/build.prop (TARGET_VENDOR_PROP).
+
+# Display: 720x1280, xhdpi.
+ro.sf.lcd_density=320
+
+# RIL. The argument string contains a space, so it cannot go through
+# PRODUCT_PROPERTY_OVERRIDES.
+rild.libpath=mtk-ril.so
+rild.libargs=-d /dev/ttyC0
+# rild reads the vendor.-prefixed name. The library is passed with -l on the
+# ril-daemon-mtk command line (init.meizu_m6.modem.rc), not as
+# vendor.rild.libpath, which would make the AOSP vendor.ril-daemon load a
+# second mtk-ril.so.
+vendor.rild.libargs=-d /dev/ttyC0
+
+# hw module selection
+# The BSP is MT6755 while the silicon is branded MT6750, so hw_get_module()
+# needs the variant suffix. gralloc is mt6750 but hwcomposer is mt6755.
+ro.hardware.gralloc=mt6750
+ro.hardware.hwcomposer=mt6755
+ro.hardware.audio.primary=mt6750
+ro.hardware.camera=mt6750
+ro.hardware.gps=mt6750
+ro.hardware.lights=mt6750
+ro.hardware.keystore=mt6750
+ro.hardware.gatekeeper=mt6750
+
+# ro.hardware.bluetooth is not set: the platform Bluetooth stack is used.
+
+# The panel is not mounted rotated; CONFIG_MTK_LCM_PHYSICAL_ROTATION_HW must
+# stay unset in the kernel. The LK boot logo stays inverted; boot_logo_updater
+# replaces it.
+ro.sf.hwrotation=0
+
+# Keep MediaTek AEE/ipanic dumps enabled: expdb is one of the few post-mortem
+# channels on this device.
+persist.mtk.aee.aed=on
+
+
+# The 3.18 kernel is older than any FCM kernel requirement, so the VINTF
+# kernel check would fail on every boot and show the "internal problem with
+# your device" dialog. Skip only the kernel part; HAL/manifest checks stay on.
+ro.vendor.vintf.legacy_kernel=true
+
+# The primary audio HAL is built against the Nougat audio.h; the audio HAL
+# wrapper adjusts the audio_hw_device layout for it.
+ro.vendor.audio.legacy_nougat_abi=1

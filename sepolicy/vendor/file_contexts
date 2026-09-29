@@ -1,0 +1,6 @@
+# Mount points created by BOARD_ROOT_EXTRA_FOLDERS in the system-image root.
+# Without a label e2fsdroid fails to pack system.img. Labelled rootfs, like
+# /config in the platform file_contexts.
+/nvdata             u:object_r:rootfs:s0
+/protect_f          u:object_r:rootfs:s0
+/protect_s          u:object_r:rootfs:s0

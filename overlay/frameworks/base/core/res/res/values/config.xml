@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Framework overlay - Meizu M6 (meizu_m6 / M711).
+-->
+<resources>
+    <!-- The mBack key is handled by the fingerprint stack, which is not
+         shipped here, so the on-screen navigation bar is required. -->
+    <bool name="config_showNavigationBar">true</bool>
+    <!-- Dual SIM with a hot-swappable tray. -->
+    <bool name="config_hotswapCapable">true</bool>
+</resources>

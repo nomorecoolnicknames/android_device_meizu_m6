@@ -1,0 +1,28 @@
+# MediaTek thermal daemons for the Meizu M6. Imported by init.mt6755.rc.
+#
+# The kernel thermal zones protect the SoC on their own; these daemons apply
+# the product policy. thermal_manager loads it from /vendor/etc/.tp, which is
+# not shipped yet, so only kernel protection is active.
+
+service thermalloadalgod /vendor/bin/thermalloadalgod
+    class main
+    user system
+    group system
+
+service thermal_manager /vendor/bin/thermal_manager
+    class main
+    user root
+    group system
+    oneshot
+
+# Modem-side TX-power throttling (opens the CCCI nodes, blob strings).
+service thermal /vendor/bin/thermal
+    class main
+    user system
+    group system
+
+# Registers with /proc/driver/thermal/clsd_pid and clmutt_tmd_pid.
+service thermald /vendor/bin/thermald
+    class main
+    user system
+    group system

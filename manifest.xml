@@ -1,4 +1,61 @@
-<manifest version="1.0" type="device">
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Meizu M6 VINTF manifest. Avoid duplicate HAL declarations supplied by module fragments.
+-->
+
+<manifest version="1.0" type="device" target-level="3">
+    <!-- audio.primary.mt6750.so (Nougat audio HAL ABI, see
+         ro.vendor.audio.legacy_nougat_abi in vendor.prop). Audio and effect
+         factories must share the same major version. -->
+    <hal format="hidl">
+        <name>android.hardware.audio</name>
+        <transport>hwbinder</transport>
+        <version>6.0</version>
+        <interface>
+            <name>IDevicesFactory</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
+        <name>android.hardware.audio.effect</name>
+        <transport>hwbinder</transport>
+        <version>6.0</version>
+        <interface>
+            <name>IEffectsFactory</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <!-- camera.mt6750.so via the legacy provider. -->
+    <hal format="hidl">
+        <name>android.hardware.camera.provider</name>
+        <transport>hwbinder</transport>
+        <version>2.4</version>
+        <interface>
+            <name>ICameraProvider</name>
+            <instance>legacy/0</instance>
+        </interface>
+    </hal>
+    <!-- configstore@1.1-service: base_vendor.mk, shipping level <= 29. -->
+    <hal format="hidl">
+        <name>android.hardware.configstore</name>
+        <transport>hwbinder</transport>
+        <version>1.1</version>
+        <interface>
+            <name>ISurfaceFlingerConfigs</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <!-- gps.mt6750.so -->
+    <hal format="hidl">
+        <name>android.hardware.gnss</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IGnss</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <!-- gralloc.mt6750.so -->
     <hal format="hidl">
         <name>android.hardware.graphics.allocator</name>
         <transport>hwbinder</transport>
@@ -8,21 +65,10 @@
             <instance>default</instance>
         </interface>
     </hal>
-    <hal format="hidl">
-        <name>android.hardware.graphics.mapper</name>
-        <transport arch="32+64">passthrough</transport>
-        <version>2.0</version>
-        <interface>
-            <name>IMapper</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <!-- Composer is passthrough-only (impl, no -service binary), like the
-         mapper above. Declared so surfaceflinger loads it explicitly instead
-         of through the legacy fallback. -->
+    <!-- hwcomposer.mt6755.so (HWC1 through HWC2On1Adapter). -->
     <hal format="hidl">
         <name>android.hardware.graphics.composer</name>
-        <transport arch="32+64">passthrough</transport>
+        <transport>hwbinder</transport>
         <version>2.1</version>
         <interface>
             <name>IComposer</name>
@@ -30,78 +76,25 @@
         </interface>
     </hal>
     <hal format="hidl">
-        <name>android.hardware.audio</name>
-        <transport>hwbinder</transport>
-        <version>2.0</version>
+        <name>android.hardware.graphics.mapper</name>
+        <transport arch="32+64">passthrough</transport>
+        <version>2.1</version>
         <interface>
-            <name>IDevicesFactory</name>
+            <name>IMapper</name>
             <instance>default</instance>
         </interface>
     </hal>
-    <hal format="hidl">
-        <name>android.hardware.audio.effect</name>
-        <transport>hwbinder</transport>
-        <version>2.0</version>
-        <interface>
-            <name>IEffectsFactory</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>android.hardware.configstore</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>ISurfaceFlingerConfigs</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>android.hardware.health</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IHealth</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>android.hardware.thermal</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IThermal</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
+    <!-- keystore.mt6750.so (MicroTrust TEE keymaster module). -->
     <hal format="hidl">
         <name>android.hardware.keymaster</name>
-        <transport arch="32+64">passthrough</transport>
+        <transport>hwbinder</transport>
         <version>3.0</version>
         <interface>
             <name>IKeymasterDevice</name>
             <instance>default</instance>
         </interface>
     </hal>
-    <hal format="hidl">
-        <name>android.hardware.gatekeeper</name>
-        <transport arch="32+64">passthrough</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IGatekeeper</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-
-    <hal format="hidl">
-        <name>android.hardware.bluetooth</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IBluetoothHci</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
+    <!-- lights.mt6750.so -->
     <hal format="hidl">
         <name>android.hardware.light</name>
         <transport>hwbinder</transport>
@@ -111,6 +104,32 @@
             <instance>default</instance>
         </interface>
     </hal>
+    <!-- media.omx@1.0-service (base_vendor.mk) over the vendor's
+         libstagefrighthw.so / libMtkOmxCore.so. -->
+    <hal format="hidl">
+        <name>android.hardware.media.omx</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IOmx</name>
+            <instance>default</instance>
+        </interface>
+        <interface>
+            <name>IOmxStore</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <!-- memtrack.mt6750.so -->
+    <hal format="hidl">
+        <name>android.hardware.memtrack</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IMemtrack</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <!-- sensors.mt6750.so -->
     <hal format="hidl">
         <name>android.hardware.sensors</name>
         <transport>hwbinder</transport>
@@ -120,76 +139,13 @@
             <instance>default</instance>
         </interface>
     </hal>
+    <!-- vibrator.default (hardware/libhardware/modules/vibrator). -->
     <hal format="hidl">
-        <name>android.hardware.wifi</name>
+        <name>android.hardware.vibrator</name>
         <transport>hwbinder</transport>
         <version>1.0</version>
         <interface>
-            <name>IWifi</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <!-- wpa_supplicant registers ISupplicant@1.1/default; without a manifest
-         entry SupplicantStaIfaceHal never binds. 1.1 also satisfies the
-         framework's @1.0 query. -->
-    <hal format="hidl">
-        <name>android.hardware.wifi.supplicant</name>
-        <transport>hwbinder</transport>
-        <version>1.1</version>
-        <interface>
-            <name>ISupplicant</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>android.hardware.radio</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IRadio</name>
-            <instance>slot1</instance>
-            <instance>slot2</instance>
-        </interface>
-        <interface>
-            <name>ISap</name>
-            <instance>slot1</instance>
-            <instance>slot2</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>android.hardware.radio.deprecated</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IOemHook</name>
-            <instance>slot1</instance>
-            <instance>slot2</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>android.hardware.camera.provider</name>
-        <transport arch="64">passthrough</transport>
-        <version>2.4</version>
-        <interface>
-            <name>ICameraProvider</name>
-            <instance>legacy/0</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>android.hardware.power</name>
-        <transport arch="32+64">passthrough</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IPower</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>android.hardware.memtrack</name>
-        <transport arch="32+64">passthrough</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IMemtrack</name>
+            <name>IVibrator</name>
             <instance>default</instance>
         </interface>
     </hal>

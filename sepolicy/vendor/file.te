@@ -1,0 +1,5 @@
+# Placeholder vendor sepolicy for meizu_m6.
+#
+# The build is permissive (androidboot.selinux=permissive) and
+# SELINUX_IGNORE_NEVERALLOWS is set: Oreo-era MediaTek vendor rules violate
+# the platform neverallows.

@@ -1,8 +1,6 @@
-# Proprietary files for the Meizu M6 (MT6750), from the stock firmware.
-# The full stock /system/vendor payload is kept. Libraries built from source
-# (libion, libtinycompress, libgui, default power/sensors/memtrack HALs) are
-# not listed. com.meizu.camera.xml is excluded: it needs Flyme framework
-# pieces.
+# Proprietary files for the Meizu M6, from the Nougat stock firmware.
+# AOSP reference DRM plugins that would override source-built modules are
+# excluded.
 
 # Stock /system permissions and Meizu helpers
 etc/permissions/android.hardware.fingerprint.xml
@@ -691,8 +689,6 @@ vendor/lib/libvt_socketbind.so
 vendor/lib/libvtmal.so
 vendor/lib/libwfo_jni.so
 vendor/lib/libwo.so
-vendor/lib/mediadrm/libdrmclearkeyplugin.so
-vendor/lib/mediadrm/libmockdrmcryptoplugin.so
 vendor/lib/mediadrm/libwvdrmengine.so
 vendor/lib64/drm/libdrmctaplugin.so
 vendor/lib64/drm/libdrmmtkplugin.so
@@ -767,5 +763,3 @@ vendor/lib64/libvt_avsync.so
 vendor/lib64/libwapi.so
 vendor/lib64/libwfo_jni.so
 vendor/lib64/libwo.so
-vendor/lib64/mediadrm/libdrmclearkeyplugin.so
-vendor/lib64/mediadrm/libmockdrmcryptoplugin.so

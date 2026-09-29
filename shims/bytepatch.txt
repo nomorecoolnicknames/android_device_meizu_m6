@@ -1,0 +1,8 @@
+# Allocation size patches for the Nougat GraphicBuffer constructor (see
+# shims/graphicbuffer.cpp): Nougat 232/136 bytes -> current 256/160 bytes.
+# Display path only (libui_ext, used by hwcomposer). Old bytes are verified
+# before patching. Format: <file> <offset> <old bytes> <new bytes>.
+lib64/libui_ext.so 0x695c 001d8052 00208052   # new(232)->new(256) before _ZN7android13GraphicBufferC1Ejjij at 0x6978
+lib64/libui_ext.so 0x6a8c 001d8052 00208052   # new(232)->new(256) before _ZN7android13GraphicBufferC1Ejjij at 0x6aac
+lib/libui_ext.so 0x535c 8820 a020   # new(136)->new(160) before _ZN7android13GraphicBufferC1Ejjij at 0x5376
+lib/libui_ext.so 0x5428 8820 a020   # new(136)->new(160) before _ZN7android13GraphicBufferC1Ejjij at 0x5440
