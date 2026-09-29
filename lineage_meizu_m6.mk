@@ -48,8 +48,3 @@ BUILD_FINGERPRINT := Meizu/meizu_M6/meizu_M6:7.0/NRD90M/1553585720:user/release-
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.multisim.config=dsds \
     ro.telephony.default_network=10,10
-
-# This product targets Android 11 (API 30).
-ifneq ($(PLATFORM_SDK_VERSION),30)
-$(error meizu_m6 lineage-18.1 requires PLATFORM_SDK_VERSION=30)
-endif
